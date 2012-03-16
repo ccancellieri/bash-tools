@@ -6,7 +6,7 @@
 start() {
         echo -n $"Starting $prog: "
         echo 
-        su - tomcat -s /bin/sh -c "$CATALINA_BASE/bin/startup.sh"
+        su - tomcat -s /bin/sh -c "CATALINA_BASE=$CATALINA_BASE $CATALINA_HOME/bin/startup.sh"
         return $?
 }
 
@@ -19,16 +19,19 @@ restart() {
 stop() {
         echo -n $"Stopping $prog: "
         echo 
-	su - tomcat -s /bin/sh -c "$CATALINA_BASE/bin/shutdown.sh -force"
+	su - tomcat -s /bin/sh -c "CATALINA_BASE=$CATALINA_BASE $CATALINA_HOME/bin/shutdown.sh -force"
         return $?
 }
 
+
 # TODO change me!
 SERVICE="tomcat"
+CATALINA_HOME="/usr/local/share/tomcat/"
+CATALINA_BASE="/var/lib/$SERVICE"
+
 
 prog="Apache Tomcat - $SERVICE"
 
-CATALINA_BASE="/var/lib/$SERVICE"
 
 case "$1" in
   start)
