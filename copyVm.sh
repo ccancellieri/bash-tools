@@ -36,7 +36,7 @@ DEST_NAME="$4"
 
 mkdir -p $DEST_PATH
 
-for i in `ls $SRC_PATH/$SRC_NAME.*`;do
+for i in `ls $SRC_PATH/$SRC_NAME*.*`;do
 	cp -rp $i `echo "$i"|sed "s/$SRC_PATH\/*$SRC_NAME/$DEST_PATH\/$DEST_NAME/"`; 
 done
 
